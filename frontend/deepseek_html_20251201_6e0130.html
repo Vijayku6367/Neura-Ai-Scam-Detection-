@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Scam Detector Pro - Neura Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🛡️ AI Scam Detector Pro</h1>
+            <p class="subtitle">Powered by Neura WASM • Multi-chain Protection</p>
+        </header>
+
+        <!-- Neura Metrics Dashboard -->
+        <div class="neura-metrics" id="neuraMetrics">
+            <h2>📊 Neura Platform Analytics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value" id="wasmExecutions">0</div>
+                    <div class="metric-label">WASM Executions</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="avgProcessingTime">0ms</div>
+                    <div class="metric-label">Avg Processing Time</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="scamsPrevented">0</div>
+                    <div class="metric-label">Scams Prevented</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value" id="detectionAccuracy">95%</div>
+                    <div class="metric-label">Detection Accuracy</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Scanner -->
+        <div class="scanner-section">
+            <div class="input-group">
+                <input type="text" id="contractAddress" placeholder="Enter contract address 0x..." class="scanner-input">
+                <button onclick="analyzeContract()" class="scan-btn">🔍 Analyze Security</button>
+            </div>
+
+            <!-- Network Selection -->
+            <div class="network-selector">
+                <label>Select Blockchain:</label>
+                <div class="network-buttons">
+                    <button class="network-btn active" data-network="ethereum">Ethereum</button>
+                    <button class="network-btn" data-network="bsc">BSC</button>
+                    <button class="network-btn" data-network="polygon">Polygon</button>
+                    <button class="network-btn" data-network="arbitrum">Arbitrum</button>
+                </div>
+            </div>
+
+            <!-- Advanced Features -->
+            <div class="advanced-features">
+                <div class="feature-toggle">
+                    <label>
+                        <input type="checkbox" id="advancedAnalysis" checked>
+                        🔍 Advanced AI Analysis
+                    </label>
+                </div>
+                <div class="feature-toggle">
+                    <label>
+                        <input type="checkbox" id="liveMonitoring">
+                        📡 Live Monitoring
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p>Scanning contract with Neura WASM...</p>
+            <div class="wasm-status" id="wasmStatus">Initializing WebAssembly</div>
+        </div>
+
+        <!-- Results -->
+        <div id="result" class="hidden">
+            <div class="risk-card">
+                <h2 id="riskLevel">Risk Level</h2>
+                <div class="score" id="riskScore">0%</div>
+                
+                <div class="security-dashboard">
+                    <h3>🛡️ Security Dashboard</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value" id="ownershipScore">-</div>
+                            <div class="metric-label">Ownership Safety</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="liquidityScore">-</div>
+                            <div class="metric-label">Liquidity Lock</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="codeScore">-</div>
+                            <div class="metric-label">Code Quality</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="communityScore">-</div>
+                            <div class="metric-label">Community Trust</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="issues">
+                    <h3>⚠️ Detected Issues:</h3>
+                    <ul id="issueList"></ul>
+                </div>
+
+                <div class="suggestions">
+                    <h3>💡 Recommendations:</h3>
+                    <p id="suggestionsText"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Honeypot System -->
+        <div class="honeypot-section">
+            <h3>🎣 Live Honeypot System</h3>
+            <button onclick="deployHoneypot()" class="honeypot-btn">Deploy Scam Honeypot</button>
+            <div id="honeypotResults" class="honeypot-results"></div>
+        </div>
+
+        <!-- Live Monitoring -->
+        <div class="monitoring-section">
+            <h3>📡 Live Threat Monitoring</h3>
+            <button onclick="startLiveMonitoring()" class="monitor-btn">Start Live Monitoring</button>
+            <div id="liveAlertsContainer" class="alerts-container"></div>
+        </div>
+
+        <!-- Scam Hunter Game -->
+        <div class="game-section">
+            <h3>🎮 Scam Hunter Game</h3>
+            <div class="leaderboard">
+                <h4>🏆 Leaderboard</h4>
+                <div id="leaderboardList" class="leaderboard-list"></div>
+            </div>
+            <button onclick="reportScam()" class="report-btn">Report Scam (+10 pts)</button>
+        </div>
+
+        <!-- Global Scam Map -->
+        <div class="map-section">
+            <h3>🌍 Live Scam Attack Map</h3>
+            <div id="scamMap" class="scam-map"></div>
+            <div class="map-legend">
+                <div class="legend-item"><span class="high-risk"></span> High Risk</div>
+                <div class="legend-item"><span class="medium-risk"></span> Medium Risk</div>
+                <div class="legend-item"><span class="low-risk"></span> Low Risk</div>
+            </div>
+        </div>
+
+        <!-- Neura Integration Code -->
+        <div class="integration-section">
+            <h3>⚡ Neura Integration Code</h3>
+            <pre class="code-block"><code>// Add to your dApp in 2 minutes
+import { NeuraScamDetector } from '@neura/scam-detector';
+
+const detector = new NeuraScamDetector();
+const result = await detector.analyzeContract('0x...');
+console.log('Risk Score:', result.score);</code></pre>
+        </div>
+
+        <!-- Demo Controls -->
+        <div class="demo-controls">
+            <button onclick="neuraTeamLiveDemo()" class="demo-btn">🚀 Start Neura Team Demo</button>
+            <button onclick="generateReport()" class="report-btn">📊 Generate Neura Report</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
