@@ -1,0 +1,26 @@
+{
+  "name": "neura-scam-detector-pro",
+  "version": "1.0.0",
+  "description": "Advanced AI Scam Detector powered by Neura WASM",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
+    "build:wasm": "cd neura-agent && cargo build --target wasm32-unknown-unknown --release",
+    "demo": "open frontend/index.html"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "keywords": [
+    "neura",
+    "scam-detection",
+    "blockchain",
+    "web3",
+    "ai"
+  ]
+}
